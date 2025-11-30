@@ -23,8 +23,8 @@ except Exception:
 # ---------------------------
 MQTT_BROKER = "broker.hivemq.com"
 MQTT_PORT = 1883
-TOPIC_SENSOR = "iot/class/session5/sensor"
-TOPIC_OUTPUT = "iot/class/session5/output"
+TOPIC_SENSOR = "sic/dibimbing/492/alexander/day7/sensor"
+TOPIC_OUTPUT = "sic/dibimbing/492/alexander/day7/output"
 MODEL_PATH = "iot_temp_model.pkl"   # put the .pkl in same repo
 
 # timezone GMT+7 helper
