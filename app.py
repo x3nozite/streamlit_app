@@ -25,7 +25,7 @@ MQTT_BROKER = "broker.hivemq.com"
 MQTT_PORT = 1883
 TOPIC_SENSOR = "sic/dibimbing/492/alexander/day7/sensor"
 TOPIC_OUTPUT = "sic/dibimbing/492/alexander/day7/output"
-MODEL_PATH = "iot_temp_model.pkl"   # put the .pkl in same repo
+MODEL_PATH = "iot_model_temp.pkl"   # put the .pkl in same repo
 
 # timezone GMT+7 helper
 TZ = timezone(timedelta(hours=7))
