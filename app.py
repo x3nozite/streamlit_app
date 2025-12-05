@@ -44,6 +44,14 @@ GLOBAL_MQ = queue.Queue()
 st.set_page_config(page_title="IoT ML Realtime Dashboard — Stable", layout="wide")
 st.title("🔥 IoT ML Realtime Dashboard — Stable")
 
+# PERSISTENT CLIENT
+if "pub" not in st.session_state:
+    pub = mqtt.Client()
+    pub.connect(MQTT_BROKER, MQTT_PORT, 60)
+    pub.loop_start()
+    st.session_state.pub = pub
+
+
 # ---------------------------
 # session_state init (must be done before starting worker)
 # ---------------------------
@@ -232,11 +240,14 @@ def process_queue():
                     pubc = mqtt.Client()
                     pubc.connect(MQTT_BROKER, MQTT_PORT, 60)
                     pubc.publish(TOPIC_OUTPUT, "ON")
+                    st.session_state.pub.publish(TOPIC_OUTPUT, "ON")
                     pubc.disconnect()
                 else:
                     pubc = mqtt.Client()
                     pubc.connect(MQTT_BROKER, MQTT_PORT, 60)
                     pubc.publish(TOPIC_OUTPUT, "OFF")
+                    st.session_state.pub.publish(TOPIC_OUTPUT, "OFF")
+
                     pubc.disconnect()
             except Exception:
                 pass
@@ -282,6 +293,7 @@ with left:
             pubc = mqtt.Client()
             pubc.connect(MQTT_BROKER, MQTT_PORT, 60)
             pubc.publish(TOPIC_OUTPUT, "ON")
+            st.session_state.pub.publish(TOPIC_OUTPUT, "ON")
             pubc.disconnect()
             st.success("Published ALERT_ON")
         except Exception as e:
@@ -291,6 +303,8 @@ with left:
             pubc = mqtt.Client()
             pubc.connect(MQTT_BROKER, MQTT_PORT, 60)
             pubc.publish(TOPIC_OUTPUT, "OFF")
+            st.session_state.pub.publish(TOPIC_OUTPUT, "OFF")
+
             pubc.disconnect()
             st.success("Published ALERT_OFF")
         except Exception as e:
