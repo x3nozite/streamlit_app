@@ -231,12 +231,12 @@ def process_queue():
                 if label == "Panas":
                     pubc = mqtt.Client()
                     pubc.connect(MQTT_BROKER, MQTT_PORT, 60)
-                    pubc.publish(TOPIC_OUTPUT, "ALERT_ON")
+                    pubc.publish(TOPIC_OUTPUT, "ON")
                     pubc.disconnect()
                 else:
                     pubc = mqtt.Client()
                     pubc.connect(MQTT_BROKER, MQTT_PORT, 60)
-                    pubc.publish(TOPIC_OUTPUT, "ALERT_OFF")
+                    pubc.publish(TOPIC_OUTPUT, "OFF")
                     pubc.disconnect()
             except Exception:
                 pass
@@ -281,7 +281,7 @@ with left:
         try:
             pubc = mqtt.Client()
             pubc.connect(MQTT_BROKER, MQTT_PORT, 60)
-            pubc.publish(TOPIC_OUTPUT, "ALERT_ON")
+            pubc.publish(TOPIC_OUTPUT, "ON")
             pubc.disconnect()
             st.success("Published ALERT_ON")
         except Exception as e:
@@ -290,7 +290,7 @@ with left:
         try:
             pubc = mqtt.Client()
             pubc.connect(MQTT_BROKER, MQTT_PORT, 60)
-            pubc.publish(TOPIC_OUTPUT, "ALERT_OFF")
+            pubc.publish(TOPIC_OUTPUT, "OFF")
             pubc.disconnect()
             st.success("Published ALERT_OFF")
         except Exception as e:
